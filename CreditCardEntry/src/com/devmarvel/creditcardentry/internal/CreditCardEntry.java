@@ -522,6 +522,7 @@ public class CreditCardEntry extends HorizontalScrollView implements
     }
 
     private void updateLast4() {
+        Log.d("###", "updateLast4")
         String number = creditCardText.getText().toString();
         int length = number.length();
         String digits = number.substring(length - 4);
