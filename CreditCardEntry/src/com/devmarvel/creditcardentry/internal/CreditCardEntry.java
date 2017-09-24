@@ -17,6 +17,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.os.ParcelableCompat;
 import android.support.v4.os.ParcelableCompatCreatorCallbacks;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.Display;
 import android.view.GestureDetector.OnGestureListener;
