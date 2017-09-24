@@ -299,7 +299,7 @@ public class CreditCardEntry extends HorizontalScrollView implements
     }
 
     public void focusOnField(final CreditEntryFieldBase field, String initialFieldValue) {
-        Log.d("###", "focusOnField, " + initialFieldValue)
+        Log.d("###", "focusOnField, " + initialFieldValue);
         field.requestFocus();
         if(!scrolling) {
             scrolling = true;
@@ -367,7 +367,7 @@ public class CreditCardEntry extends HorizontalScrollView implements
 
     @Override
     public void focusOnPreviousField(CreditEntryFieldBase field) {
-        Log.d("###", "focusOnPreviousField, " )
+        Log.d("###", "focusOnPreviousField, " );
         CreditEntryFieldBase view = prevFocusField.get(field);
         if (view != null) {
             focusOnField(view);
@@ -524,7 +524,7 @@ public class CreditCardEntry extends HorizontalScrollView implements
     }
 
     private void updateLast4() {
-        Log.d("###", "updateLast4")
+        Log.d("###", "updateLast4");
         String number = creditCardText.getText().toString();
         int length = number.length();
         String digits = number.substring(length - 4);
