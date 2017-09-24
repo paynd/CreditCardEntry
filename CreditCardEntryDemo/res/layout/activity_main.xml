@@ -28,6 +28,7 @@
             android:padding="15dp"
             app:card_number_hint="XXXX XXXX XXXX XXXX"
             app:helper_text_color="@color/text_helper_color"
+            app:text_size="15sp"
             app:include_zip="false"/>
 
         <TextView

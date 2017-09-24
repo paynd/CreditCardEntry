@@ -2,6 +2,7 @@ package com.devmarvel.creditcardentry.library;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Parcel;
@@ -369,5 +370,9 @@ public class CreditCardForm extends RelativeLayout {
     public void setZipCodeTextHint(String text) {
         entry.setZipCodeTextHint(text);
     }
+
+	public void setTypeface(Typeface typeface) {
+		entry.setTypeface(typeface);
+	}
 }
 

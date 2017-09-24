@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Parcel;
@@ -19,6 +20,7 @@ import android.support.v4.os.ParcelableCompatCreatorCallbacks;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.SparseArray;
+import android.util.TypedValue;
 import android.view.Display;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.Gravity;
@@ -94,6 +96,7 @@ public class CreditCardEntry extends HorizontalScrollView implements
         } else {
             textColor = null;
         }
+        int textSize = typedArray.getDimensionPixelSize(R.styleable.CreditCardForm_text_size, 19);
         typedArray.recycle();
 
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -124,18 +127,21 @@ public class CreditCardEntry extends HorizontalScrollView implements
         creditCardText.setId(R.id.cc_card);
         creditCardText.setDelegate(this);
         creditCardText.setWidth(width);
+        creditCardText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         container.addView(creditCardText);
         includedFields.add(creditCardText);
         CreditEntryFieldBase currentField = creditCardText;
 
         textFourDigits = new TextView(context);
-        textFourDigits.setTextSize(20);
+        textFourDigits.setId(R.id.cc_four_digits);
+        textFourDigits.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         if (textColor != null) {
             textFourDigits.setTextColor(textColor);
         }
         container.addView(textFourDigits);
 
         expDateText = new ExpDateText(context, attrs);
+        expDateText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         expDateText.setId(R.id.cc_exp);
         if (includeExp) {
             expDateText.setDelegate(this);
@@ -148,6 +154,7 @@ public class CreditCardEntry extends HorizontalScrollView implements
 
         securityCodeText = new SecurityCodeText(context, attrs);
         securityCodeText.setId(R.id.cc_ccv);
+        securityCodeText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         if (includeSecurity) {
             securityCodeText.setDelegate(this);
             if (!includeZip) {
@@ -173,6 +180,7 @@ public class CreditCardEntry extends HorizontalScrollView implements
 
         zipCodeText = new ZipCodeText(context, attrs);
         zipCodeText.setId(R.id.cc_zip);
+        zipCodeText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         if (includeZip) {
             zipCodeText.setDelegate(this);
             container.addView(zipCodeText);
@@ -671,4 +679,11 @@ public class CreditCardEntry extends HorizontalScrollView implements
         zipCodeText.setHint(text);
     }
 
+    public void setTypeface(Typeface typeface) {
+        creditCardText.setTypeface(typeface);
+        expDateText.setTypeface(typeface);
+        securityCodeText.setTypeface(typeface);
+        zipCodeText.setTypeface(typeface);
+        textFourDigits.setTypeface(typeface);
+    }
 }
