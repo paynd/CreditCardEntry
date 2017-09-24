@@ -299,6 +299,7 @@ public class CreditCardEntry extends HorizontalScrollView implements
     }
 
     public void focusOnField(final CreditEntryFieldBase field, String initialFieldValue) {
+        Log.d("###", "focusOnField, " + initialFieldValue)
         field.requestFocus();
         if(!scrolling) {
             scrolling = true;
@@ -366,6 +367,7 @@ public class CreditCardEntry extends HorizontalScrollView implements
 
     @Override
     public void focusOnPreviousField(CreditEntryFieldBase field) {
+        Log.d("###", "focusOnPreviousField, " )
         CreditEntryFieldBase view = prevFocusField.get(field);
         if (view != null) {
             focusOnField(view);
@@ -530,6 +532,7 @@ public class CreditCardEntry extends HorizontalScrollView implements
     }
 
     private void nextField(CreditEntryFieldBase currentField, String initialFieldValue) {
+        Log.d("###", "nextField, " + initialFieldValue);
         CreditEntryFieldBase next = nextFocusField.get(currentField);
         if (next == null) {
             entryComplete(currentField);
@@ -539,6 +542,7 @@ public class CreditCardEntry extends HorizontalScrollView implements
     }
 
     private void entryComplete(View clearField) {
+        Log.d("###", "entryComplete");
         hideKeyboard();
         clearField.clearFocus();
         if (onCardValidCallback != null) onCardValidCallback.cardValid(getCreditCard());
