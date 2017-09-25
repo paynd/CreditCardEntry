@@ -135,7 +135,8 @@ public class CreditCardEntry extends HorizontalScrollView implements
 
         textFourDigits = new TextView(context);
         textFourDigits.setId(R.id.cc_four_digits);
-        textFourDigits.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+        textFourDigits.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize);
+        Log.d("###", "textFourDigits, textSize" + textSize);
         if (textColor != null) {
             textFourDigits.setTextColor(textColor);
         }
