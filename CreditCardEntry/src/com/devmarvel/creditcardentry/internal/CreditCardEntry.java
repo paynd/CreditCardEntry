@@ -136,8 +136,7 @@ public class CreditCardEntry extends HorizontalScrollView implements
         textFourDigits = new TextView(context);
         textFourDigits.setId(R.id.cc_four_digits);
         textFourDigits.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-//        textFourDigits.setWidth();
-        textFourDigits.setMinWidth(70);
+        textFourDigits.setMinWidth(measureTextWidth(textFourDigits));
         Log.d("###", "textFourDigits, textSize" + textSize);
         if (textColor != null) {
             textFourDigits.setTextColor(textColor);
@@ -216,6 +215,12 @@ public class CreditCardEntry extends HorizontalScrollView implements
                 focusOnField(creditCardText);
             }
         });
+    }
+
+    private int measureTextWidth(TextView textView){
+        textView.setText("4242");
+        textView.measure(0, 0);       //must call measure!
+        return textView.getMeasuredWidth();
     }
 
     @Override
