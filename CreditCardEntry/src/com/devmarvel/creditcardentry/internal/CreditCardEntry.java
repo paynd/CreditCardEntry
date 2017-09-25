@@ -20,7 +20,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.os.ParcelableCompat;
 import android.support.v4.os.ParcelableCompatCreatorCallbacks;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.Display;
@@ -219,16 +218,6 @@ public class CreditCardEntry extends HorizontalScrollView implements
         });
     }
 
-    private int measureTextWidth(TextView textView, String text){
-        Paint p = new Paint();
-        Rect bounds = new Rect();
-        p.setTextSize(textSize);
-        p.getTextBounds(text, 0, text.length(), bounds);
-        textView.setText(text);
-        Log.e("###", "measureTextWidth: " + bounds.width());
-        return bounds.width();
-    }
-
     @Override
     public void onCardTypeChange(CardType type) {
         cardImage.setImageResource(type.frontResource);
@@ -394,6 +383,15 @@ public class CreditCardEntry extends HorizontalScrollView implements
         if (view != null) {
             focusOnField(view);
         }
+    }
+
+    private int measureTextWidth(TextView textView, String text){
+        Paint p = new Paint();
+        Rect bounds = new Rect();
+        p.setTextSize(textSize);
+        p.getTextBounds(text, 0, text.length(), bounds);
+        textView.setText(text);
+        return bounds.width();
     }
 
     public void setCardNumberHint(String hint) {
