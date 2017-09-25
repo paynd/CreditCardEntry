@@ -20,6 +20,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.os.ParcelableCompat;
 import android.support.v4.os.ParcelableCompatCreatorCallbacks;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.Display;
@@ -141,6 +142,7 @@ public class CreditCardEntry extends HorizontalScrollView implements
         if (textColor != null) {
             textFourDigits.setTextColor(textColor);
         }
+        textFourDigits.setMinWidth(measureTextWidth(textFourDigits, "4242"));
         container.addView(textFourDigits);
 
         expDateText = new ExpDateText(context, attrs);
@@ -223,6 +225,7 @@ public class CreditCardEntry extends HorizontalScrollView implements
         p.setTextSize(textSize);
         p.getTextBounds(text, 0, text.length(), bounds);
         textView.setText(text);
+        Log.e("###", "measureTextWidth: " + bounds.width());
         return bounds.width();
     }
 
@@ -547,8 +550,6 @@ public class CreditCardEntry extends HorizontalScrollView implements
         int length = number.length();
         String digits = number.substring(length - 4);
         textFourDigits.setText(digits);
-        textFourDigits.setMinWidth(measureTextWidth(textFourDigits, digits));
-//        textFourDigits.setMinWidth(120);
     }
 
     private void nextField(CreditEntryFieldBase currentField, String initialFieldValue) {
