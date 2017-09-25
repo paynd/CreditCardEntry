@@ -18,7 +18,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.os.ParcelableCompat;
 import android.support.v4.os.ParcelableCompatCreatorCallbacks;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.Display;
@@ -136,8 +135,6 @@ public class CreditCardEntry extends HorizontalScrollView implements
         textFourDigits = new TextView(context);
         textFourDigits.setId(R.id.cc_four_digits);
         textFourDigits.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-        textFourDigits.setMinWidth(measureTextWidth(textFourDigits));
-        Log.d("###", "textFourDigits, textSize" + textSize);
         if (textColor != null) {
             textFourDigits.setTextColor(textColor);
         }
@@ -217,8 +214,8 @@ public class CreditCardEntry extends HorizontalScrollView implements
         });
     }
 
-    private int measureTextWidth(TextView textView){
-        textView.setText("4242");
+    private int measureTextWidth(TextView textView, String text){
+        textView.setText(text);
         textView.measure(0, 0);       //must call measure!
         return textView.getMeasuredWidth();
     }
@@ -317,7 +314,6 @@ public class CreditCardEntry extends HorizontalScrollView implements
     }
 
     public void focusOnField(final CreditEntryFieldBase field, String initialFieldValue) {
-        Log.d("###", "focusOnField, " + initialFieldValue);
         field.requestFocus();
         if(!scrolling) {
             scrolling = true;
@@ -385,7 +381,6 @@ public class CreditCardEntry extends HorizontalScrollView implements
 
     @Override
     public void focusOnPreviousField(CreditEntryFieldBase field) {
-        Log.d("###", "focusOnPreviousField, " );
         CreditEntryFieldBase view = prevFocusField.get(field);
         if (view != null) {
             focusOnField(view);
@@ -542,15 +537,14 @@ public class CreditCardEntry extends HorizontalScrollView implements
     }
 
     private void updateLast4() {
-        Log.d("###", "updateLast4");
         String number = creditCardText.getText().toString();
         int length = number.length();
         String digits = number.substring(length - 4);
         textFourDigits.setText(digits);
+        textFourDigits.setMinWidth(measureTextWidth(textFourDigits, digits));
     }
 
     private void nextField(CreditEntryFieldBase currentField, String initialFieldValue) {
-        Log.d("###", "nextField, " + initialFieldValue);
         CreditEntryFieldBase next = nextFocusField.get(currentField);
         if (next == null) {
             entryComplete(currentField);
@@ -560,7 +554,6 @@ public class CreditCardEntry extends HorizontalScrollView implements
     }
 
     private void entryComplete(View clearField) {
-        Log.d("###", "entryComplete");
         hideKeyboard();
         clearField.clearFocus();
         if (onCardValidCallback != null) onCardValidCallback.cardValid(getCreditCard());
