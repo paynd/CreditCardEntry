@@ -97,7 +97,7 @@ public class CreditCardEntry extends HorizontalScrollView implements
         } else {
             textColor = null;
         }
-        int textSize = typedArray.getDimensionPixelSize(R.styleable.CreditCardForm_text_size, 19);
+        int textSize = typedArray.getDimensionPixelSize(R.styleable.CreditCardForm_text_size, 30);
         typedArray.recycle();
 
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -135,7 +135,9 @@ public class CreditCardEntry extends HorizontalScrollView implements
 
         textFourDigits = new TextView(context);
         textFourDigits.setId(R.id.cc_four_digits);
-        textFourDigits.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize);
+        textFourDigits.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+//        textFourDigits.setWidth();
+        textFourDigits.setMinWidth(70);
         Log.d("###", "textFourDigits, textSize" + textSize);
         if (textColor != null) {
             textFourDigits.setTextColor(textColor);
